@@ -256,5 +256,5 @@ class HMMAbstractclass():
 
         return kwargs["hmm"].loglikelihood(self._create_sequence_set(
             qsr_seq=self._qsr_to_symbol(kwargs["qsr_seq"]),
-            symbols=self.generate_alphabet(num_symbols=self.num_possible_states)
+            symbols=self.generate_alphabet(num_symbols=3**5+2*(3**2))
         ))

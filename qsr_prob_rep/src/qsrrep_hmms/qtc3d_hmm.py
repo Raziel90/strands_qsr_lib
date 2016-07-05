@@ -10,7 +10,7 @@ from qtc3d_converter.point_to_QTC3D import ind2qtc3d,qtc3d2ind
 import pickle
 import ghmm as gh
 import numpy as np
-
+NUM_SYMBOLS=3**5+2*3**2
 
 class QTC3DHMM(QTCHMMAbstractclass):
     
@@ -37,7 +37,7 @@ class QTC3DHMM(QTCHMMAbstractclass):
         input_to_state = dict(kwargs["input_to_state"])
         sequences_of_activity = kwargs["qsr_seq"]
         num_states=max(input_to_state.values())
-        num_emiss=3**5+2*(3**2)-1
+        num_emiss=NUM_SYMBOLS
         emiss=np.ones((num_states+2,num_emiss))
         for sequence in sequences_of_activity:
             for sample in sequence:
@@ -128,7 +128,7 @@ class QTC3DHMM(QTCHMMAbstractclass):
 
         print 'Generating HMM:'
         print '\tCreating symbols...'
-        symbols = self.generate_alphabet(3**5+2*3**2-1)
+        symbols = self.generate_alphabet(NUM_SYMBOLS)
         startprob = np.zeros(num_possible_states)
         startprob[0] = 1
         print '\t\t', symbols
@@ -169,7 +169,21 @@ class QTC3DHMM(QTCHMMAbstractclass):
         return ind2qtc3d(symbol)
         
         
-    
+    def _log_likelihood(self, **kwargs):
+        """Computeed the loglikelihood for the given sample(s) to be produced by
+        the HMM.
+
+        :param kwargs:
+            * qsr_seq: A list of lists of qsr sequences to check against the HMM
+            * hmm: The to generate the loglikelihood for
+
+        :return: The accumulated loglikelihood for all the given samples
+        """
+
+        return kwargs["hmm"].loglikelihood(self._create_sequence_set(
+            qsr_seq=self._qsr_to_symbol(kwargs["qsr_seq"]),
+            symbols=self.generate_alphabet(num_symbols=num_symbols)
+        ))
     
     
     
