@@ -41,7 +41,7 @@ class ProbRepLib(object):
 
         :param request_message: The request message object which has to be an instance of one of the request classes in rep_io.py and has to inherit from 'HMMRepRequestAbstractclass'
 
-        :return: The resulting respons message that corresponds to the request message.
+        :return: The resulting responds message that corresponds to the request message.
         """
         assert(issubclass(request_message.__class__, RepRequestAbstractclass))
 

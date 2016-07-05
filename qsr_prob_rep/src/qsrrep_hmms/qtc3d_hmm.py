@@ -5,10 +5,10 @@ Created on Thu May 26 15:34:51 2016
 @author: claudio
 """
 from qsrrep_hmms.qtc_hmm_abstractclass import QTCHMMAbstractclass
+from qsrrep_hmms.hmm_abstractclass import HMMAbstractclass
 from qtc3d_converter.point_to_QTC3D import ind2qtc3d,qtc3d2ind
 import pickle
 import ghmm as gh
-import json
 import numpy as np
 
 
@@ -67,6 +67,7 @@ class QTC3DHMM(QTCHMMAbstractclass):
             tran[0,input_to_state[sequence[0]]]+=1
             tran[input_to_state[sequence[-1]],-1]+=1
             for ind,sample in enumerate(sequence[:-1]):
+                #print sample,sequence[ind+1]
                 tran[input_to_state[sample],input_to_state[sequence[ind+1]]]+=1
         
         
@@ -98,7 +99,7 @@ class QTC3DHMM(QTCHMMAbstractclass):
         :return: The trained HMM
 
         """
-        input_to_state = dict(kwargs["input_to_state"])
+        input_to_state = kwargs["input_to_state"]
         state_seq = kwargs["qsr_seq"]
         
         num_states=max(input_to_state.values())
@@ -127,7 +128,7 @@ class QTC3DHMM(QTCHMMAbstractclass):
 
         print 'Generating HMM:'
         print '\tCreating symbols...'
-        symbols = self._generate_alphabet(3**5+2*3**2-1)
+        symbols = self.generate_alphabet(3**5+2*3**2-1)
         startprob = np.zeros(num_possible_states)
         startprob[0] = 1
         print '\t\t', symbols

@@ -9,6 +9,7 @@ from qsrrep_hmms.qtcb_hmm import QTCBHMM
 from qsrrep_hmms.qtcbc_hmm import QTCBCHMM
 from qsrrep_hmms.rcc3_hmm import RCC3HMM
 from qsrrep_hmms.generic_hmm import GenericHMM
+from qsrrep_hmms.qtc3d_hmm import QTC3DHMM
 import ghmm as gh
 import json
 
@@ -23,7 +24,8 @@ class RepHMM(object):
         "qtcb": QTCBHMM,
         "qtcbc": QTCBCHMM,
         "rcc3": RCC3HMM,
-        "generic": GenericHMM
+        "generic": GenericHMM,
+        "QTC3DHMM": QTC3DHMM
     }
 
     namespace = "hmm"

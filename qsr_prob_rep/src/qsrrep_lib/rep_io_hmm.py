@@ -65,7 +65,7 @@ class HMMReqResponseAbstractclass(ReqResponseAbstractclass):
 
 class HMMRepRequestCreate(HMMRepRequestAbstractclass):
 
-    def __init__(self, qsr_type, qsr_seq, pseudo_transitions=False, lookup_table=None, transition_matrix=None, emission_matrix=None, start_at_zero=False):
+    def __init__(self, qsr_type, qsr_seq, pseudo_transitions=False, lookup_table=None, transition_matrix=None, emission_matrix=None, start_at_zero=False, input_to_state=None):
         """
         :param qsr_type: The QSR this HMM is modelling
         :param qsr_seq: The list of lists of the QSR state chains
@@ -79,7 +79,8 @@ class HMMRepRequestCreate(HMMRepRequestAbstractclass):
             "lookup_table": lookup_table,
             "transition_matrix": transition_matrix,
             "emission_matrix": emission_matrix,
-            "start_at_zero": start_at_zero
+            "start_at_zero": start_at_zero,
+            "input_to_state": input_to_state
         }
 
 
