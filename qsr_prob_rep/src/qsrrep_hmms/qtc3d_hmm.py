@@ -17,7 +17,7 @@ class QTC3DHMM(QTCHMMAbstractclass):
     
     def __init__(self):
         super(QTC3DHMM, self).__init__()
-        self.num_possible_states = 0
+        self.num_possible_states = NUM_SYMBOLS
         
                 
     def _save_to_file(self,filename):
@@ -179,10 +179,12 @@ class QTC3DHMM(QTCHMMAbstractclass):
 
         :return: The accumulated loglikelihood for all the given samples
         """
-
+       
+        a,b,c,=kwargs["hmm"].asMatrices()
+        print np.array(c).sum(axis=0)
         return kwargs["hmm"].loglikelihood(self._create_sequence_set(
-            qsr_seq=self._qsr_to_symbol(kwargs["qsr_seq"]),
-            symbols=self.generate_alphabet(num_symbols=num_symbols)
+            qsr_seq=kwargs["qsr_seq"],
+            symbols=self.generate_alphabet(num_symbols=int(NUM_SYMBOLS))
         ))
     
     
